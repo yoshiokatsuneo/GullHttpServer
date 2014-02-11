@@ -10,6 +10,8 @@
 		07826FFE18AA5C21000E590A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07826FFD18AA5C21000E590A /* Foundation.framework */; };
 		0782700118AA5C21000E590A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0782700018AA5C21000E590A /* main.m */; };
 		0782700518AA5C21000E590A /* GullHttpServer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0782700418AA5C21000E590A /* GullHttpServer.1 */; };
+		0782700D18AA5C80000E590A /* GullHttpServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0782700C18AA5C80000E590A /* GullHttpServer.m */; };
+		0782701018AA6DD0000E590A /* MyGullHttpServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0782700F18AA6DD0000E590A /* MyGullHttpServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +33,10 @@
 		0782700018AA5C21000E590A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0782700318AA5C21000E590A /* GullHttpServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GullHttpServer-Prefix.pch"; sourceTree = "<group>"; };
 		0782700418AA5C21000E590A /* GullHttpServer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = GullHttpServer.1; sourceTree = "<group>"; };
+		0782700B18AA5C80000E590A /* GullHttpServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GullHttpServer.h; sourceTree = "<group>"; };
+		0782700C18AA5C80000E590A /* GullHttpServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GullHttpServer.m; sourceTree = "<group>"; };
+		0782700E18AA6DD0000E590A /* MyGullHttpServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGullHttpServer.h; sourceTree = "<group>"; };
+		0782700F18AA6DD0000E590A /* MyGullHttpServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGullHttpServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,10 @@
 				0782700018AA5C21000E590A /* main.m */,
 				0782700418AA5C21000E590A /* GullHttpServer.1 */,
 				0782700218AA5C21000E590A /* Supporting Files */,
+				0782700B18AA5C80000E590A /* GullHttpServer.h */,
+				0782700C18AA5C80000E590A /* GullHttpServer.m */,
+				0782700E18AA6DD0000E590A /* MyGullHttpServer.h */,
+				0782700F18AA6DD0000E590A /* MyGullHttpServer.m */,
 			);
 			path = GullHttpServer;
 			sourceTree = "<group>";
@@ -139,6 +149,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0782701018AA6DD0000E590A /* MyGullHttpServer.m in Sources */,
+				0782700D18AA5C80000E590A /* GullHttpServer.m in Sources */,
 				0782700118AA5C21000E590A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

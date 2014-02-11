@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MyGullHttpServer.h"
 
 int main(int argc, const char * argv[])
 {
@@ -15,7 +16,8 @@ int main(int argc, const char * argv[])
         
         // insert code here...
         NSLog(@"Hello, World!");
-        
+        MyGullHttpServer *server = [[MyGullHttpServer alloc] initWithHost:@"127.0.0.1" port:12345];
+        [server run];
     }
     return 0;
 }
