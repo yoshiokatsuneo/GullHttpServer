@@ -61,37 +61,39 @@
 -(void)run
 {
     while(true){
-        struct sockaddr_storage sin;
-        unsigned int sin_len = sizeof(sin);
-        int as = accept(listen_sock, (struct sockaddr*)&sin, &sin_len);
-        if(as == -1){
-            fprintf(stderr, "accept error:%d(%s)", errno, strerror(errno));
-            return;
-        }
-        FILE *fp_r = fdopen(dup(as), "rb");
-        FILE *fp_w = fdopen(dup(as), "wb");
-        char buf[1024] = "";
-        if(fgets(buf, sizeof(buf), fp_r)){
-            char pathstr[1024] = "";
-            sscanf(buf, "GET %1023s", pathstr);
-            NSString *path = [NSString stringWithUTF8String:pathstr];
-            self.currentURL = [[NSURL alloc] initWithScheme:@"http" host:@"localhost" path:path];
-            NSString *objc_method_str = [[self.currentURL.path substringFromIndex:1] stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
-            SEL sel = NSSelectorFromString(objc_method_str);
-            if([self respondsToSelector:sel]){
-                NSString *result = [self performSelector:sel];
-                fputs("HTTP/1.0 200 OK\r\n", fp_w);
-                fputs("\r\n", fp_w);
-                fputs(result.UTF8String, fp_w);
-            }else{
-                fputs("HTTP/1.0 200 OK\r\n", fp_w);
-                fputs("\r\n", fp_w);
-                fprintf(fp_w, "No such method[%s] defined in this class.", path.UTF8String);
+        @autoreleasepool {
+            struct sockaddr_storage sin;
+            unsigned int sin_len = sizeof(sin);
+            int as = accept(listen_sock, (struct sockaddr*)&sin, &sin_len);
+            if(as == -1){
+                fprintf(stderr, "accept error:%d(%s)", errno, strerror(errno));
+                return;
             }
+            FILE *fp_r = fdopen(dup(as), "rb");
+            FILE *fp_w = fdopen(dup(as), "wb");
+            char buf[1024] = "";
+            if(fgets(buf, sizeof(buf), fp_r)){
+                char pathstr[1024] = "";
+                sscanf(buf, "GET %1023s", pathstr);
+                NSString *path = [NSString stringWithUTF8String:pathstr];
+                self.currentURL = [[NSURL alloc] initWithScheme:@"http" host:@"localhost" path:path];
+                NSString *objc_method_str = [[self.currentURL.path substringFromIndex:1] stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+                SEL sel = NSSelectorFromString(objc_method_str);
+                if([self respondsToSelector:sel]){
+                    NSString *result = [self performSelector:sel];
+                    fputs("HTTP/1.0 200 OK\r\n", fp_w);
+                    fputs("\r\n", fp_w);
+                    fputs(result.UTF8String, fp_w);
+                }else{
+                    fputs("HTTP/1.0 200 OK\r\n", fp_w);
+                    fputs("\r\n", fp_w);
+                    fprintf(fp_w, "No such method[%s] defined in this class.", path.UTF8String);
+                }
+            }
+            fclose(fp_r);
+            fclose(fp_w);
+            close(as);
         }
-        fclose(fp_r);
-        fclose(fp_w);
-        close(as);
     }
 }
 @end
